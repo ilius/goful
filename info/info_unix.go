@@ -20,7 +20,7 @@ func (w *infoWindow) draw(fi os.FileInfo) {
 
 	var statfs syscall.Statfs_t
 	_ = syscall.Statfs(".", &statfs)
-	free := statfs.Bavail * uint64(statfs.Bsize)
+	free := uint64(statfs.Bavail) * uint64(statfs.Bsize)
 	all := statfs.Blocks * uint64(statfs.Bsize)
 	used := float64(all-free) / float64(all) * 100
 	freeSI := util.FormatSize(int64(free))
